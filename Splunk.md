@@ -212,6 +212,19 @@ Gives you information about how the search completed, and time it took to run
 If you are using a KO wrong, it will suggest how to correct your search
 
 
+https://www.mediafire.com/file/rlv4d9t89j908cj/Splunk_Video_Course_Downloads.zip/file 
+https://docs.google.com/document/d/1PiHcXLJ93zOmeY-1BToRr-X0Az4vt7UWMN1rQBw7luI/edit#heading=h.6fxiynwr0aa5
+https://docs.google.com/document/d/137z48GMwp4okkvAZhxUD-TXaS9z93N-FaqyUq7IB6uQ/edit?usp=sharing
+https://docs.google.com/document/d/1MwNqij-7PsEhopvmFwyB2s2PThpUczz4Uas0VZ3Gpm0/edit?usp=sharing
+https://docs.google.com/document/d/1b8oVRsss4g7eDyhn1QegX9n2OtVuBmk5L3vGrs6og9Q/edit?usp=sharing
+https://docs.google.com/document/d/1JTjzjY3UiGr8xCsjkxI6UPhy6d3-KwParM04MHEZX-4/edit?usp=sharing
+https://docs.google.com/document/d/1kDuvq0XVtWtXt7WlmVO8S8Q07LOBupaW8JziACGGXu8/edit?usp=sharing
+https://docs.google.com/document/d/1U1dxnzchvnBVwvk_GYfSEsFcX4wvrB1_hcZCKgd952g/edit?usp=sharing
+https://docs.google.com/document/d/1iCe8PqIRsYdEwjZbqlQD471K6WC6GbcjoVYpwwQFmps/edit?usp=sharing
+https://docs.google.com/document/d/1ybWYM6M65gWmB6UmYaVoHHCakDoM5DY3fUK4o3tn7ic/edit?usp=sharing
+https://docs.google.com/document/d/1AUVWkx2ONTuRTc7yAJsiW1H10jwy1B0Ss-4AQCGxzJg/edit?usp=sharing
+
+
  
 
 
