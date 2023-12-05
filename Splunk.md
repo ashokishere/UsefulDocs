@@ -225,8 +225,20 @@ https://docs.google.com/document/d/1ybWYM6M65gWmB6UmYaVoHHCakDoM5DY3fUK4o3tn7ic/
 https://docs.google.com/document/d/1AUVWkx2ONTuRTc7yAJsiW1H10jwy1B0Ss-4AQCGxzJg/edit?usp=sharing
 
 
- 
+ ### Splunk 2 - Samples
 
+ Using Trendline
+ 
+ ![image](https://github.com/ashokishere/UsefulDocs/assets/46769524/de88ef02-7f16-409a-8c98-dac3a6700377)
+
+ Using  Totals
+ 
+ ![image](https://github.com/ashokishere/UsefulDocs/assets/46769524/ecb1e5ef-fc03-47de-8d33-1a8b67e0bcb4)
+
+Use md5 has function
+```
+index="k8s" | eval hash=md5(host)| search hash=2af1fe955fa696a8c6d1c259ac63c71f
+```
 
 
 
