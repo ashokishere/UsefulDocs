@@ -38,7 +38,18 @@ https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_preventing-dirty-
 
 https://redis.io/commands/
 
-## 8 . CURL
+## 8. CURL
 
 https://curl.se/docs/tutorial.html
+
+## 9. HELM
+https://helm.sh/
+
+https://artifacthub.io/
+
+## 8. HTTP Response 
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+## 10. Promethues
+https://github.com/prometheus-operator/kube-prometheus/blob/main/docs/access-ui.md
 
