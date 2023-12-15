@@ -33,3 +33,12 @@ Kubectl commands you should know: https://lnkd.in/gh6-aFRm
 ## 6. Visual Studio
 
 https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_preventing-dirty-writes
+
+## 7. Redis
+
+https://redis.io/commands/
+
+## 8 . CURL
+
+https://curl.se/docs/tutorial.html
+
