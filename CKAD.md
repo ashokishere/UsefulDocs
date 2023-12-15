@@ -29,3 +29,7 @@ You should learn how to troubleshoot the cluster. Recommended pages:###
 ## 5. Use the Kubectl Cheat Sheet:
 
 Kubectl commands you should know: https://lnkd.in/gh6-aFRm
+
+## 6. Visual Studio
+
+https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_preventing-dirty-writes
