@@ -53,3 +53,11 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
 ## 10. Promethues
 https://github.com/prometheus-operator/kube-prometheus/blob/main/docs/access-ui.md
 
+### 11. k8s - Bret Fisher
+
+
+https://slides.kubernetesmastery.com/#277
+
+### Redis Notes
+https://www.itpanther.com/redis-sets-datatype-and-commands/
+
