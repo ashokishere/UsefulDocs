@@ -58,6 +58,12 @@ https://github.com/prometheus-operator/kube-prometheus/blob/main/docs/access-ui.
 
 https://slides.kubernetesmastery.com/#277
 
-### Redis Notes
+### 12. Redis Notes
 https://www.itpanther.com/redis-sets-datatype-and-commands/
 
+## 13. Vault (Zeel Vora)
+Getting Started with Vault https://docs.google.com/document/d/1Z6VWdgWPuOdX9V18PIhpzz-OOlzTCKyqze1yHKJA7jo/edit?usp=sharing
+Authentication and Authorization https://docs.google.com/document/d/1e6ovWukyDQvBpHVFN4yYUXgwyHIPSmMNuh5D7IeBCSc/edit?usp=sharing 
+Vault Tokens https://docs.google.com/document/d/15hM2oJVawdRav0QOciuBeDtVIdpkGQ_XDPy9xOMHRSk/edit?usp=sharing
+Vault Architecture https://docs.google.com/document/d/18eLRBtrp_0W0eGts3eIzjiluoNuflRyqDDn9cevH_HQ/edit?usp=sharing
+Important Pointers for Exams https://docs.google.com/document/d/1nOF9QJ5Nz5E2NzfPexlAV5OIPZp47Scz8Y2Z57Q0Uio/edit?usp=sharing
