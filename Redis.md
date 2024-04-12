@@ -259,7 +259,8 @@ helm install: installs a Helm chart
 
 solution-one-kube-prometheus: specifies the name to assign to the Helm release
 
---repo https://prometheus-community.github.io/helm-charts: specifies the repository from which the chart should be installed. In this case, it points to the Prometheus Community Helm Charts repository located at the provided URL. Helm will fetch the chart from this repository.
+--repo https://prometheus-community.github.io/helm-charts: specifies the repository from which the chart should be installed. In this case, 
+it points to the Prometheus Community Helm Charts repository located at the provided URL. Helm will fetch the chart from this repository.
 
 kube-prometheus-stack: specifies name of the chart you want to install
 
@@ -278,7 +279,8 @@ kubectl get service -n monitoring
 
 kubectl get ingress -n monitoring
 
-Try checking that the applications are accessible through ingress. Use curl to show only the HTTP response status code, as the response body will be long (HTML). The response status code should be 200 (meaning "OK")
+Try checking that the applications are accessible through ingress. Use curl to show only the HTTP response status code, 
+as the response body will be long (HTML). The response status code should be 200 (meaning "OK")
 
 curl -L -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1/prometheus/metrics
 
@@ -288,3 +290,228 @@ curl -L -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1/alertmanager
 
 Resources
 Documentation
+
+
+repl-diskless-sync yes: Enables diskless replication synchronization. Diskless synchronization means the master sends the differences in data to the
+replica instead of writing the entire dataset to disk and then transmitting it.
+
+repl-diskless-sync-max-replicas 4: Limits the number of replicas that can perform diskless synchronization simultaneously to 4.
+
+repl-diskless-load on-empty-db: Specifies that diskless replicas should perform a full synchronization if they are empty.
+
+repl-disable-tcp-nodelay yes: Disables TCP_NODELAY optimization, which can improve throughput by sending smaller packets but may introduce more latency. 
+Disabling it may be suitable for some scenarios.
+
+repl-backlog-size 500mb: Sets the size of the replication backlog. The replication backlog is a rolling buffer that keeps track of the recent write operations 
+on the master, allowing replicas to catch up if they fall behind.
+
+appendfsync no: Disables automatic disk synchronization after every write operation. This can improve write performance but may increase the risk of data loss in case of a crash.
+
+save "": Disables automatic snapshots. Snapshots are a point-in-time representation of the dataset stored on disk.
+
+maxmemory 13003676416: Sets the maximum amount of memory Redis can use. The value is specified in bytes (13 GB in this case).
+
+maxmemory-policy volatile-ttl: Configures the eviction policy when reaching the maximum memory limit. In this case, it evicts based on the time-to-live (TTL) of 
+the keys, prioritizing keys with an expiration set.
+
+hz 50: Sets the number of times Redis will try to perform background tasks per second.
+
+dynamic-hz yes: Allows Redis to adjust the number of times it performs background tasks based on the system's activity.
+
+ 
+
+ 
+
+ 
+
+Redis Sentinel Configuration:
+
+ 
+
+ 
+
+sentinel resolve-hostnames yes: This configuration option indicates whether Sentinel should resolve the IP addresses of master and slave instances
+using DNS. Setting it to "yes" means Sentinel will resolve hostnames to IP addresses.
+
+sentinel announce-hostnames yes: This option determines whether Sentinel should announce its own hostname and IP address to other Sentinels and Redis instances. 
+Setting it to "yes" means Sentinel will announce hostnames.
+
+sentinel down-after-milliseconds mymaster 5000: This configuration sets the down-after-milliseconds parameter for the specified master (mymaster).
+It defines the time in milliseconds that a Redis master must be unreachable before a Sentinel considers it as down.
+
+sentinel failover-timeout mymaster 60000: This sets the failover-timeout parameter for the specified master (mymaster). It defines the time in milliseconds
+that a Sentinel will wait before initiating a failover after a master is detected as down.
+
+sentinel parallel-syncs mymaster 1: This option sets the parallel-syncs parameter for the specified master (mymaster). It defines the number of replicas 
+that can be reconfigured to replicate with the new master simultaneously during a failover.
+
+ 
+
+ 
+
+Redis Sentinel  APP Configuration:
+
+ 
+
+spring.redis.master.name: Specifies the name of the Redis master. In this case, it's set to mymaster.
+
+spring.redis.sentinel.hostname: Specifies the hostname of the Redis Sentinel. It is set to sentinel.ns-mobile-pr.svc.cluster.local.
+
+spring.redis.sentinel.port: Specifies the port on which the Redis Sentinel is running. It is set to 5000.
+
+spring.redis.sentinel.auth.password: Specifies the password for connecting to Redis Sentinel. It appears to be encrypted using some form of encryption
+(ENC(...)). Make sure to decrypt it appropriately during runtime.
+
+ 
+
+ 
+
+ 
+
+Jedis Pool Configuration:
+
+Configuration parameters for Jedis connection pool:
+
+spring.redis.jedis.pool.max-active: Maximum number of active connections.
+
+spring.redis.jedis.pool.max-idle: Maximum number of idle connections.
+
+spring.redis.jedis.pool.min-idle: Minimum number of idle connections.
+
+spring.redis.jedis.pool.test-on-borrow: Whether to test the connection before borrowing it from the pool.
+
+spring.redis.jedis.pool.test-on-return: Whether to test the connection when returning it to the pool.
+
+spring.redis.jedis.pool.test-while-idle: Whether to test idle connections.
+
+Eviction and Block Configuration:
+
+spring.redis.jedis.pool.min-evictable-idle-time: Minimum time (in milliseconds) an object can be idle before it's eligible for eviction.
+
+spring.redis.jedis.pool.time-between-eviction-runs: Time (in milliseconds) between eviction runs.
+
+spring.redis.jedis.pool.tests-per-eviction-run: Number of tests to run during eviction.
+
+spring.redis.jedis.pool.block-when-exhausted: Whether to block when the pool is exhausted.
+
+Cache Configuration:
+
+spring.cache.redis.time-to-live: Specifies the time to live (TTL) for cached data in seconds. It's set to 21,600 seconds (6 hours).
+
+spring.cache.cache-names: Specifies the names of the caches. It includes productDisplayIncludeListCache and getPackageProducts.
+
+ 
+
+Configuring Redis Sentinel with resolve-hostnames yes and announce-hostnames yes has both advantages and disadvantages:
+
+Advantages:
+
+Hostname Resolution: Enabling resolve-hostnames allows Redis Sentinel to resolve IP addresses to hostnames. This can be beneficial for 
+better readability and understanding of the Redis topology, especially in large-scale environments with multiple instances distributed across various servers.
+
+Hostname Announcements: Enabling announce-hostnames allows Redis Sentinel to announce hostnames instead of IP addresses in its notifications.
+This can be useful for clients or monitoring tools that rely on hostnames for identification and management purposes. Hostnames are typically more stable and 
+descriptive than IP addresses, especially in dynamic environments where IP addresses may change frequently.
+
+Disadvantages:
+
+Dependency on DNS: Enabling hostname resolution introduces a dependency on DNS (Domain Name System). If DNS resolution fails or experiences issues,
+it can impact the ability of Redis Sentinel to resolve hostnames and communicate with Redis instances properly. This dependency might introduce potential points of failure in the Redis deployment.
+
+Performance Overhead: Hostname resolution can introduce additional overhead compared to using IP addresses directly, as it requires DNS queries to resolve 
+hostnames to IP addresses. In environments with high traffic or latency-sensitive applications, this overhead could potentially impact performance.
+
+DNS Cache: Redis Sentinel may rely on DNS caching mechanisms provided by the underlying operating system or DNS resolver. If DNS caching is not properly 
+configured or managed, it could lead to stale DNS records being used by Redis Sentinel, resulting in connectivity issues or misconfigurations.
+
+In summary, while enabling hostname resolution and announcements in Redis Sentinel can improve readability and manageability of the Redis deployment, it 
+also introduces dependencies on DNS and potential performance overhead. Careful consideration should be given to the trade-offs involved, based on the specific
+requirements and constraints of the environment.
+
+Redis useful Commands
+Info
+
+Since most of the stats data comes from the INFO command you should first run this to view that there.
+
+
+```
+$ redis-cli INFO
+```
+Try piping this output to a file.
+
+Memory usage
+
+Since we generally recommend setting the maxmemory size, it is possible to calculate the percentage of memory in use and alert based on results of the maxmemory 
+configuration value and the used_memory stat.
+
+First set the maxmemory.
+
+
+```
+$ redis-cli config set maxmemory 100000
+```
+Then you can pull the two data points to see how that could be used to calculate memory usage.
+
+```
+
+$ redis-cli INFO | grep used_memory:
+$ redis-cli CONFIG GET maxmemory
+```
+Client data
+
+You can pull the clients section of the INFO command:
+
+```
+$ redis-cli info clients
+```
+or maybe a particular metric you would want to track:
+
+
+```
+$ redis-cli info clients | grep connected_clients
+```
+
+Stats section
+
+Use redis-cli to list the full 'stats' section.
+
+Hit ratio
+
+A cache hit/miss ratio could be generated using two data points in the stats section.
+
+
+```
+$ redis-cli INFO stats | grep keyspace 
+```
+Evicted keys
+
+Eviction occurs when redis has reached its maximum memory and maxmemory-policy in redis.conf is set to something other than volatile-lru.
+
+
+```
+$ redis-cli INFO stats | grep evicted_keys
+```
+Expired keys
+
+It is a good idea to keep an eye on the expirations to make sure redis is performing as expected.
+
+
+```
+$ redis-cli INFO stats | grep expired_keys
+```
+Keyspace
+
+The following data could be used for graphing the size of the keyspace as a quick drop or spike in the number of keys is a good indicator of issues.
+
+
+```
+$ redis-cli INFO keyspace
+```
+Workload (connections received, commands processed)
+
+The following stats are a good indicator of workload on the Redis server.
+
+
+```
+$ redis-cli INFO stats | egrep "^total_"
+```
